@@ -71,11 +71,21 @@ class { 'openvas':
 }
 ```
 
+Notes:
+
+- The compose file path is derived automatically as
+  `${compose_dir}/docker-compose.yml`.
+- `web_port` controls only the firewall rule port.
+- The GSA container bind is fixed to `127.0.0.1:9392` in the managed compose
+  template.
+
 ## Limitations
 
 - Built and tested for Ubuntu (22.04, 24.04).
-- This module assumes Docker engine and compose plugin are available via the
-  dependency stack.
+- By default (`manage_docker => true`) this module manages Docker and Docker
+  Compose plugin.
+- If you set `manage_docker => false`, Docker and Docker Compose plugin must
+  already be present.
 
 ## Development
 

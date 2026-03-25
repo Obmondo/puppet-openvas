@@ -13,6 +13,7 @@ describe 'openvas::compose' do
           compose_dir: '/opt/openvas',
           feed_release: '24.10',
           manage_docker: false,
+          admin_password: 'test_password',
         }
       end
 
@@ -31,6 +32,10 @@ describe 'openvas::compose' do
       end
 
       it do
+        is_expected.to contain_file('/opt/openvas/docker-compose.yml').with_content(%r{restart: unless-stopped})
+      end
+
+      it do
         is_expected.to contain_docker_compose('openvas').with(
           ensure: 'present',
           compose_files: ['/opt/openvas/docker-compose.yml'],
@@ -41,6 +46,7 @@ describe 'openvas::compose' do
         let(:params) do
           super().merge(
             install: false,
+            admin_password: 'test_password',
           )
         end
 
@@ -56,6 +62,7 @@ describe 'openvas::compose' do
           )
         end
       end
+
     end
   end
 end

@@ -14,6 +14,12 @@ describe 'openvas' do
         PUPPET
       end
 
+      let(:params) do
+        {
+          admin_password: 'test_password',
+        }
+      end
+
       it { is_expected.to compile.with_all_deps }
       it { is_expected.to contain_class('docker') }
       it { is_expected.to contain_class('docker::compose') }
@@ -24,6 +30,7 @@ describe 'openvas' do
         let(:params) do
           {
             manage_docker: false,
+            admin_password: 'test_password',
           }
         end
 
@@ -35,6 +42,7 @@ describe 'openvas' do
         let(:params) do
           {
             install: false,
+            admin_password: 'test_password',
           }
         end
 
